@@ -90,7 +90,7 @@ app.get("/", async function(req, res){
 
 app.post("/teacher", async function(req, res){
 
-
+    
     const lecture = await occupancyTable.find({teacher: req.body.teacher, $or: [{startTime: req.body.time}, {endTime: req.body.time}], day: req.body.day})
     const teacher = await teacherTable.findById(req.body.teacher)
     if (teacher == null) {
@@ -147,4 +147,6 @@ app.post("/teacher", async function(req, res){
     res.redirect("/")    
 })
 
-app.listen(8000, ()=>{console.log("----------AppStarted-----------");})
+const PORT = process.env.PORT || 8080
+
+app.listen(PORT, ()=>{console.log("----------AppStarted-----------");})
